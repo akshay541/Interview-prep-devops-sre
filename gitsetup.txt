@@ -1,0 +1,23 @@
+[alias]
+    cfg = !git config --global -e
+    pl  = pull
+    ps  = push -u origin HEAD
+    ck  = checkout
+    b   = branch
+    st  = status -s
+    l   = !git log --graph --decorate --pretty=oneline --abbrev-commit --all | less -R
+    rbi = rebase -i
+    rbm = rebase main
+    sw  = "!zsh -c 'branch=$(git branch --list --format=\"%(refname:short)\" | sed \"/^\\*/d\" | fzf); if [[ -n \"$branch\" ]]; then git switch \"$branch\"; else echo \"No branch selected.\"; fi'"
+    db  = "!bash -c 'protected_branches=(\"master\" \"main\"); branch=$(git branch --list --format=\"%(refname:short)\" | sed \"/^\\*/d\" | fzf); if [[ \" ${protected_branches[@]} \" =~ \" ${branch} \" ]]; then echo \"Error: Attempt to delete a protected branch (\"${branch}\") aborted.\"; elif [[ -n $branch ]]; then git branch -d $branch && echo \"Branch '$branch' deleted successfully.\" || echo \"Failed to delete branch '$branch'. It may not be fully merged.\"; else echo \"No branch selected.\"; fi'"
+    a   = add -A
+    cm  = commit -m
+    acm = "!git add -A && git commit -m"
+    rnb = branch -m
+    i   = init
+    ra  = remote add
+    rr  = remote remove
+    rv  = remote -v
+    pso = "!git push --set-upstream origin $(git branch --show-current)"
+    vader = "!git push --force-with-lease origin $(git branch --show-current)"
+    plo  = "!f() { git pull origin \"$1\"; }; f"
